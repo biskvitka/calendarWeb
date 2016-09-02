@@ -1,4 +1,4 @@
 <?php
-	include 'view.html';
+ 		include 'calendar.php';
 
 ?>

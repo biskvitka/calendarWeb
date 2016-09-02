@@ -1,6 +1,14 @@
 ul {list-style-type: none;}
 body {font-family: Verdana, sans-serif;}
 
+ul li{
+    display: inline-block;
+    text-align: center;
+}
+ul a{
+    display: inline-block;
+
+}
 /* Month header */
 .month {
     padding: 70px 25px;
@@ -9,12 +17,13 @@ body {font-family: Verdana, sans-serif;}
 }
 
 /* Month list */
-.month ul {
+.month table {
     margin: 0;
     padding: 0;
 }
 
 .month ul li {
+    /*display: inline-block;*/
     color: white;
     font-size: 20px;
     text-transform: uppercase;
@@ -31,41 +40,61 @@ body {font-family: Verdana, sans-serif;}
 .month .next {
     float: right;
     padding-top: 10px;
+    display: inline-block;
 }
 
 /* Weekdays (Mon-Sun) */
 .weekdays {
+    width: 100%;
     margin: 0;
     padding: 10px 0;
     background-color:#ddd;
 }
 
-.weekdays li {
+.weekdays td {
     display: inline-block;
-    width: 13.6%;
+    width: 14%;
     color: #666;
     text-align: center;
 }
 
 /* Days (1-31) */
 .days {
-    padding: 10px 0;
+    padding: 1px 0;
     background: #eee;
     margin: 0;
+    width : 100%;
+    height: 100%;
 }
 
-.days li {
+.days td {
+    min-height: 10%;
+    vertical-align: top;
     list-style-type: none;
     display: inline-block;
-    width: 13.6%;
+    width:14%;
     text-align: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size:12px;
+    color:#1abc9c;
+    text-align: center;
+}
+
+.days p{
+    list-style-type: none;
+    vertical-align: top;
+    display: inline-block;
+    width: 100%;
+    word-wrap: break-word;
+    text-align: left;
     margin-bottom: 5px;
     font-size:12px;
     color:#777;
 }
 
 /* Highlight the "current" day */
-.days li .active {
+.days td .active {
     padding: 5px;
     background: #1abc9c;
     color: white !important
