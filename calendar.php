@@ -1,17 +1,17 @@
 <?php 
-	
-	$monthName[1] = 'ßíóàğè';
-	$monthName[2] = 'Ôåâğóàğè';
-	$monthName[3] = 'Ìàğò';
-	$monthName[4] = 'Àïğèë';
-	$monthName[5] = 'Ìàé';
-	$monthName[6] = 'Şíè';
-	$monthName[7] = 'Şëè';
-	$monthName[8] = 'Àâãóñò';
-	$monthName[9] = 'Ñåïòåìâğè';
-	$monthName[10] = 'Îêòîìâğè';
-	$monthName[11] = 'Íîåìâğè';
-	$monthName[12] = 'Äåêåìâğè';
+	header('Content-Type: text/html; charset=UTF-8');
+	$monthName[1] = 'January';
+	$monthName[2] = 'February';
+	$monthName[3] = 'March';
+	$monthName[4] = 'April';
+	$monthName[5] = 'May';
+	$monthName[6] = 'June';
+	$monthName[7] = 'July';
+	$monthName[8] = 'August';
+	$monthName[9] = 'September';
+	$monthName[10] = 'Octomber';
+	$monthName[11] = 'November';
+	$monthName[12] = 'December';
 
 	$date = time();
 	$today = date('d', $date);
@@ -30,7 +30,7 @@
 	}
 
 	function printDaysNames(){
-		$daysNames = Array('Ïîíåäåëíèê', 'Âòîğíèê', 'Ñğÿäà', '×åòâúğòúê', 'Ïåòúê', 'Ñúáîòà', 'Íåäåëÿ');
+		$daysNames = Array('Monday', 'Tuesday', 'Wednesday', 'Thirstday', 'Friday', 'Saturday', 'Sunday');
 		foreach ($daysNames as $key ) {
 			print("<td>$key</td>");
 		}
