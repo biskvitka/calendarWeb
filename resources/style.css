@@ -1,0 +1,290 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	font-family: Comic Sans MS;
+	vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+
+body {
+	line-height: 1;
+}
+
+ol, ul {
+	list-style: none;
+}
+
+blockquote, q {
+	quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}	
+	
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+body{
+	background-image: url(bcg.jpg);
+	background-color: #fafafa;
+	background-repeat: no-repeat;
+	background-position: center top; 
+	background-size: cover;
+	background-attachment: fixed;
+}
+
+#content{
+	width: 86%;
+	margin: 0 auto;
+	background-color: rgba(255,255,255,0.0);
+}
+
+.student{
+	background-color: #246215;
+}
+
+.lecturer{
+	background-color: #004990;
+}
+
+.admin{
+	background-color: #690505;
+}
+
+header{
+	width:100%;
+	height: 90px;
+	color: #ffffff;
+	font-family: Comic Sans MS;
+	position: relative;
+	opacity: 0.6;
+	margin-bottom: 20px;
+}
+
+#title-container{
+	margin: 0 auto;
+	text-align: left;
+	width: 84%;
+}
+
+#title{
+	font-size: 200%;
+	margin-top: 25px;
+	display: inline-block;
+}
+
+#right-title{
+	position: absolute;
+	top: 45%;
+	right: 3%;
+	text-align: right;
+}
+#right-title a{
+	display: inline-block;
+	margin-bottom: 5px;
+	color: #ffffff;
+}
+#left-content{
+	width: 25%;
+	display: inline-block;
+}
+#calendar{
+	background-color: rgba(255, 255, 255, 0.7);
+
+}
+
+#calendar-content-student{
+	border: 1px solid rgba(89, 141, 7, 0.7);
+}
+
+#calendar-content-lecturer{
+	border: 1px solid rgba(0, 73, 144, 0.7);
+}
+
+#calendar-content-admin{
+	border: 1px solid rgba(0, 73, 144, 0.7);
+}
+
+#calendar-title{
+	width: 100%;
+	height: 22px;
+	color: #ffffff;
+	font-size: 22px;
+	text-align:center;
+	padding: 10px 0px;
+}
+#days{
+	padding: 1%;
+}
+
+#days table{
+	width: 100%;
+	text-align: center;
+}
+#days table th, #days table td{
+	padding: 3.9% 0px;
+}
+#today{
+	background-color: rgba(127, 181, 234, 0.4);
+}
+#events{
+	display: inline-block;
+	font-family: Comic Sans MS;
+	width: 850px;
+	float: right;
+}
+#events table{
+	width: 100%;
+	text-align: center;
+}
+
+#events td{
+	width: 20%;
+	padding: 5px;
+}
+
+.events-student tr:nth-child(even){
+	background-color: rgba(98, 63, 21, 0.1);
+}
+
+.events-student tr:nth-child(odd){
+	background-color: rgba(98, 63, 21, 0.6);
+}
+
+.events-lecturer tr:nth-child(even){
+	background-color: rgba(102, 102, 101, 0.1);
+}
+
+.events-lecturer tr:nth-child(odd){
+	background-color: rgba(102, 102, 101, 0.6);
+}
+
+.events-admin tr:nth-child(even){
+	background-color: rgba(248, 150, 51, 0.1);
+}
+
+.events-admin tr:nth-child(odd){
+	background-color: rgba(248, 150, 51, 0.7);
+}
+
+#add-event{
+	padding-top: 25px;
+}
+
+#add-event p{
+	font-size: 20px;
+	margin-bottom: 16px;
+}
+
+form {
+	font-size: 17px;
+	margin-top: 10%;
+}
+
+#add-event form select {
+	display: block;
+	margin: 2px 0px 8px;
+	border: 1px solid #e4e3e3;
+	border-radius: 2px;
+	padding: 3px;
+	width: 83%;
+}
+
+input[type=date]
+{
+	display: block;
+	margin: 2px 0px 8px;;
+	border: 1px solid #d6d6d6;
+	border-radius: 2px;
+	padding: 3px;
+	width: 77%;
+}
+
+input[type=submit]{
+	margin-top: 10px;
+	background-color: rgba(0, 73, 144, 0.7);
+	padding: 6px;
+	border: 0px;
+	width: 86px;
+	border-radius: 3px;
+	font-size: 15px;
+	box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+	color: #ffffff;
+}
+
+
+/*            LOG IN             */
+/********************************/
+#login{
+    margin-left: 30%;
+
+	
+}
+
+input[type=text], input[type=password] {
+    width: 50%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 50%;
+	
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+span.psw {
+    float: right;
+    padding-top: 16px;
+	margin-right: 50%;
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+    span.psw {
+       display: block;
+       float: none;
+    }
+}
