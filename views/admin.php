@@ -5,12 +5,12 @@
 		<title>Студентски календар</title>
 		<link rel="stylesheet" type="text/css" href="resources/style.css">
 	</head>
-	<body>		
+	<body id="admin-content">		
 		<header class="admin">
 			<div id="title-container"><div id="title">Студентски календар</div></div>
 			<span id="right-title">
-				<a href="login.htm">изход</a>
-				<p>Админ Админ, админ</p>
+				<a href="index.php?logout=y">изход</a>
+				<p><?php echo $_SESSION["name"];?>, администратор</p>
 			<span>
 		</header>
 		<section id="content">

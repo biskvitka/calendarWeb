@@ -1,9 +1,8 @@
 <?php
-
+	require_once("includes/header.php");
 	if (!empty($_POST)) {
 		print_r($_POST);
-	
-		$db = new DBManager();
+		
 		$userInfo = $db->login($_POST["uname"], $_POST["psw"]);
 		if(!empty($userInfo)) {
 			session_start();

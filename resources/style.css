@@ -69,17 +69,6 @@ body{
 	background-color: rgba(255,255,255,0.0);
 }
 
-.student{
-	background-color: #246215;
-}
-
-.lecturer{
-	background-color: #004990;
-}
-
-.admin{
-	background-color: #690505;
-}
 
 header{
 	width:100%;
@@ -143,6 +132,20 @@ header{
 	text-align:center;
 	padding: 10px 0px;
 }
+
+
+#student-content #calendar-title, #student-content header{
+	background-color: #246215;
+}
+
+#admin-content #calendar-title, #admin-content header{
+	background-color: #690505;
+}
+
+#lecturer-content #calendar-title, #lecturer-content header{
+	background-color: #004990;
+}
+
 #days{
 	padding: 1%;
 }
