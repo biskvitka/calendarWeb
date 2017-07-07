@@ -24,4 +24,9 @@
 	require_once("Site.php");
 	$site = new Site();
 	$calendar = $site->calendar();
+	
+	$date = date('Y-m-d');
+	if (isset($_GET['date']) && $_GET['date'] == date('Y-m-d', strtotime($_GET['date']))) {
+		$date = $_GET['date'];
+	}
 ?>
