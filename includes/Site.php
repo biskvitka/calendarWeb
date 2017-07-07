@@ -2,8 +2,9 @@
 	class Site{
 	
 	private function printDaysString($day, $month, $year){
+		global $page;
+		
 		$first_day = mktime(0, 0, 0, $month, 1, $year);
-		$title = date('F', $first_day);
 		$day_of_week = date('w', $first_day);
 		$days_in_month = cal_days_in_month(0, $month, $year);
 		
@@ -21,13 +22,14 @@
 		$day_num = 1;
 		while ($day_num <= $days_in_month){
 			if($day != $day_num){
-				$dayString = $dayString."<td>";
+				$date = date('Y-m-d', mktime(0, 0, 0, $month, $day_num, $year));
+				$dayString = $dayString."<td><a href=".$page."?date=".$date.">";
 				$dayString = $dayString.$day_num;
 			}
 			else {
-				$dayString = $dayString."<td id=\"today\">".$day_num;
+				$dayString = $dayString."<td id='today'>".$day_num;
 			}
-			$dayString = $dayString."</td>";
+			$dayString = $dayString."</a></td>";
 			if ($day_count % 7 == 0) {
 				$dayString = $dayString."</tr><tr>";
 			}
@@ -39,42 +41,45 @@
 	}
 	
 	public function calendar() {
-	
-	$monthName[1]  = 'Януари';
-	$monthName[2]  = 'Февруари';
-	$monthName[3]  = 'Март';
-	$monthName[4]  = 'Април';
-	$monthName[5]  = 'Май';
-	$monthName[6]  = 'Юни';
-	$monthName[7]  = 'Юли';
-	$monthName[8]  = 'Август';
-	$monthName[9]  = 'Септември';
-	$monthName[10] = 'Октомври';
-	$monthName[11] = 'Ноември';
-	$monthName[12] = 'Декември';
-	$date = time();
-	$today = date('d', $date);
-	$month = 0;
-	if ($month == 0) {
-		$month = date('n', $date);
-		$year = date('Y', $date);
-	} elseif($month == 13) {
-		$month = 1;
-		$year++;
-	} elseif($month == 0){
-		$month = 12;
-		$year--;
-	}
+		global $page;
+		$date = date('Y-m-d');
+
+		// $today = date('d', $date);
+		if (isset($_GET['date']) && $_GET['date'] == date('Y-m-d', strtotime($_GET['date']))) {
+			$date = $_GET['date'];
+		}
+		$month 	= date('n', strtotime($date));
+		$year 	= date('Y', strtotime($date));
+		$day 	= date('d', strtotime($date));
+		
+		$previousMonth = date('Y-m-d', strtotime('-1 month', strtotime($date)));
+		$nextMonth     = date('Y-m-d', strtotime('+1 month', strtotime($date)));
+		
+		$monthName[1]  = 'Януари';
+		$monthName[2]  = 'Февруари';
+		$monthName[3]  = 'Март';
+		$monthName[4]  = 'Април';
+		$monthName[5]  = 'Май';
+		$monthName[6]  = 'Юни';
+		$monthName[7]  = 'Юли';
+		$monthName[8]  = 'Август';
+		$monthName[9]  = 'Септември';
+		$monthName[10] = 'Октомври';
+		$monthName[11] = 'Ноември';
+		$monthName[12] = 'Декември';
+
 		$calendar = '
-			<div id="calendar-title">
-							<'.$monthName[$month].' '.$year.' >
-						</div>
+			<div id="calendar-title">'.
+							'<a href='.$page.'?date='.$previousMonth.'> < </a>'
+						.$monthName[$month].' '.$year.
+							'<a href='.$page.'?date='.$nextMonth.'	> > </a>'
+			.'</div>
 						<div id="days">
 							<table>
 								<tr>
 									<th>ПН</th><th>ВТ</th><th>СР</th><th>ЧТ</th><th>ПТ</th><th>СБ</th><th>НД</th>
 								</tr>'
-								.$this->printDaysString($today, $month, $year).
+								.$this->printDaysString($day, $month, $year).
 							'</table>
 						</div>
 		';
