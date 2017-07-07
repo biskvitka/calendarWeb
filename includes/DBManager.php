@@ -6,11 +6,15 @@
 
         private $host = "localhost";
         private $user = "root";
-        private $password = "";
+        private $password = ">@crypt__Magnetic93!<";
+
+        function __construct() {
+            echo "<p>DBManager constructed</p>";
+        }
 
         // --------------- basic ---------------
         public function connect() { 
-            // echo "<p>connection ok</p>";
+            echo "<p>connection ok</p>";
             $this->dbcon = mysqli_connect($this->host, $this->user, $this->password) or die("DB connection problem");
           
             $this->db = mysqli_select_db($this->dbcon, "calendar") or die("Couldn't select database");
@@ -27,11 +31,6 @@
 
         public function closeConnection() {
             mysqli_close($this->dbcon);
-        }
-
-        public function isRegistered($username) {
-
-            // if($this->dbcon != NULL )
         }
 
         public function login($username, $password) {
@@ -58,18 +57,62 @@
             $result = mysqli_fetch_assoc($result);
             $userid = $result['userid'];
             $query = "INSERT INTO subjects(name, userid) values('$name', $userid)";
-            echo $query;
+            // echo $query;
             $result = $this->getQuery($query);
         }
         
-        // public function insertEvent($type, $date, $roomid, $userid, $name) {
-        //     $query = "SELECT subjectid FROM subjects WHERE userid = $userid and name = '$name'";
-        //     echo "$query";
-        //     //$query = "INSERT INTO events(type, date, room, status, subjectId) values('$type', $date, $roomid, 'none', )";
+        public function insertEvent($type, $date, $roomid, $userid, $name) {
+            $query = "SELECT subjectid FROM subjects WHERE userid = $userid and name = '$name'";
+            
+            $result = $this->getQuery($query);
+            $subjid = mysqli_fetch_assoc($result);
+
+            $query = "INSERT INTO events(type, date, room, status, subjectId) values('$type', '$date', $roomid, 'none', $subjid[0])";
+            // echo "$query";
+            $result = $this->getQuery($query);
+        }
+
+        // returns array of query results. Each result is an assoc array with keys {date, subjname, lecturer, room, type}
+        public function getStudentEvents($userid, $date) {
+            $query = "SELECT events.date, subjects.name as subjname, users.name as lecturer, events.room, events.type FROM subjectstudent 
+                        JOIN events ON events.subjectId = subjectstudent.subjectid 
+                        JOIN subjects ON events.subjectId = subjects.subjectid 
+                        JOIN users ON users.userid = subjects.userid
+                    WHERE subjectstudent.userid = $userid and status = 'approved' and DATE(date) = '$date'";
+            echo $query;
+            $result = $this->getQuery($query);
+            return $result;
+            // while($event = mysqli_fetch_assoc($result)) {
+            //     echo "<pre>";
+            //     print_r($event);
+            //     echo "</pre>";
+            // }
+        }
+
+        public function getAllEvents($date) {
+            $query = "SELECT events.eventid, events.date, subjects.name as subjname, users.name as lecturer, events.room, events.type FROM events
+                        JOIN subjects ON events.subjectId = subjects.subjectid
+                        JOIN users ON users.userid = subjects.userid
+                    WHERE DATE(date) = '$date' and  status = 'approved'";
+            echo $query;
+            $result = $this->getQuery($query);
+            $rows;
+
+            while($event = mysqli_fetch_assoc($result)) {
+                $rows[] = $event;
+            }
+
+           return $rows;
+        }
+
+        public function setEventStatus($eventid, $status) {
+            $query = "UPDATE events SET status = '$status' WHERE eventid = $eventid";
+            echo $query;
+            $result = $this->getQuery($query);
+        }
+
+        // public function insertEvent($date, $room, $subjname) {
+            
         // }
-
-    //     public function getStudentEvents() {
-
-    //     }
      }
 ?>
