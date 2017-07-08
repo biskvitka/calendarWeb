@@ -85,7 +85,81 @@
 		';
 		return $calendar;
 	}
-		
-		
+
+	private function readPropsFile($filepath, $numberprops) {
+		if(!file_exists($filepath)) {
+			return;
+		}
+
+		$file = fopen($filepath, 'r') or die("Cannot open file at " . $filepath);
+		while(!feof($file)) {
+			$line = fgets($file);
+			$arrayline = explode(',', $line);
+			if(sizeof($arrayline) != $numberprops) {
+				continue;
+			}
+			$lines[] = $arrayline;
+		}
+
+		return $lines;
 	}
+
+	public function readUsers($filepath) {
+		$keys = array('username', 'password', 'name', 'type', 'email');
+		$numberprops = sizeof($keys);
+
+		$users = $this->readPropsFile($filepath, $numberprops);
+		if(empty($users)) {
+			return;
+		}
+
+		$records = array();
+		foreach($users as $user) {
+			$records[] = array_combine($keys, $user);
+		}
+
+		return $records;
+		// echo "<pre>";
+		// print_r($records);
+		// echo "</pre>";
+	}
+
+	public function readSubjects($filepath) {
+		$keys = array('subjname', 'userid');
+		$numberprops = sizeof($keys);
+
+		$subjects = $this->readPropsFile($filepath, $numberprops);
+		if(empty($subjects)) {
+			return;
+		}
+
+		$records = array();
+		foreach($subjects as $subject) {
+			$records[] = array_combine($keys, $subject);
+		}
+
+		return $records;
+		// echo "<pre>";
+		// print_r($records);
+		// echo "</pre>";
+	}
+
+	public function readSubjectStudent($filepath) {
+		$keys = array('subjname', 'username');
+
+		$numberprops = sizeof($keys);
+
+		$entities = $this->readPropsFile($filepath, $numberprops);
+		if(empty($entities)) {
+			return;
+		}
+
+		$records = array();
+		foreach($entities as $entity) {
+			$records[] = array_combine($keys, $entity);
+		}
+
+		return $records;
+	}
+}
 ?>
