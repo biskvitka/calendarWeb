@@ -168,17 +168,10 @@
             $result = $this->getQuery($query);
         }
 
-        // public function changeRoom($eventid, $room) {
-        //     $query = "UPDATE events SET room = '$room'"
-        // }
-        // public function getNumberCol($tablename) {
-        //     $query = "SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = '$tablename'";
-        //     $result = $this->getQuery($query);
-        //     //$result = mysqli_fetch_array($result);
-        //     echo "<pre>";
-        //     print_r($result);
-        //     echo "</pre>";
-        // }
-
+        public function changeRoom($eventid, $room) {
+            $query = "UPDATE events SET room = $room, status = 'none' WHERE eventid = $eventid";
+            echo $query;
+            $result = $this->getQuery($query);
+        }
      }
 ?>
