@@ -54,10 +54,15 @@
 			<section id="events" class="events-lecturer">
 				<table>
 					
-					<?php foreach($events as $event) {
+					<?php 
+					if (empty($events)) {
+						echo "<p id='no-event' '>Няма събития за този ден</p>";
+					} else {
+						foreach($events as $event) {
 						echo "<tr>
 								<td>".date("H:m", strtotime($event["date"]))."</td><td>".$event["subjname"]."</td><td>стая ".$event["room"]."</td><td>".$event["lecturer"]."</td><td>".$event["type"]."</td>
 							</tr>";	
+						}
 					}	
 					?>
 				</table>
