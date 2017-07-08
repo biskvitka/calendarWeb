@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	// JS for upload users button
 	var selectedFile = document.getElementById('usersUpload');
-	if(usersUpload) {
+	if(selectedFile) {
 		selectedFile.addEventListener('change', function(e){
 			var fileName = '';			
 			fileName = e.target.value.split( '\\' ).pop();
@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	
 	// JS for upload lecturers and subjects button
 	var selectedFile = document.getElementById('subjectsUpload');
-	if(usersUpload) {
+	if(selectedFile) {
 		selectedFile.addEventListener('change', function(e){
 			var fileName = '';			
 			fileName = e.target.value.split( '\\' ).pop();
@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	// JS for upload students and their subjects button
 	var selectedFile = document.getElementById('studentsSubjectsUpload');
-	if(usersUpload) {
+	if(selectedFile) {
 		selectedFile.addEventListener('change', function(e){
 			var fileName = '';			
 			fileName = e.target.value.split( '\\' ).pop();
@@ -41,4 +41,15 @@ document.addEventListener('DOMContentLoaded', function() {
 			}
 		});
 	}
+	
+	var eventType = document.getElementById('eventType');
+	eventType.addEventListener('change', function(e){
+		var type = eventType.options[eventType.selectedIndex].value;
+		if(type == 'lecture'){
+			endDate = document.getElementById("endDate"); 
+			endDate.disabled = false;
+		} else {
+			endDate.disabled = true;
+		}
+	});
 });

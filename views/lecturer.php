@@ -4,6 +4,7 @@
 		<meta charset="UTF-8">
 		<title>Студентски календар</title>
 		<link rel="stylesheet" type="text/css" href="resources/style.css">
+		<script type="text/javascript" src="resources/javascript.js"></script>
 	</head>
 	<body id="lecturer-content">		
 		<header class="lecturer">
@@ -22,31 +23,42 @@
 				</section>
 				<section id="add-event">
 					<p>Добавяне на събитие</p>
-					<form action="#" method="post">
-						Час<select>
-							<option>10:00</option>
-							<option>11:00</option>
-							<option>12:00</option>
+					<form action="lecturer.php" method="post">
+						Час<select name="hour">
+							<option value="9">09:00</option>
+							<option value="10">10:00</option>
+							<option value="11">11:00</option>
+							<option value="12">12:00</option>
+							<option value="13">13:00</option>
+							<option value="14">14:00</option>
+							<option value="15">15:00</option>
+							<option value="16">16:00</option>
+							<option value="17">17:00</option>
+							<option value="18">18:00</option>
 						</select>
-						Предмет<select style="max-width: 300px;">
-							<option>Висша алгебра</option>
-							<option>Аналитична геометрия</option>
-							<option>ДИС</option>
-							<option>Увод в програмирането</option>
+						Предмет<select name="subjects" style="max-width: 300px;">
+							<?php foreach ($subjects as $subject){
+									echo "<option value=".$subject['subjectid'].">".$subject['name']."</option>";
+								}
+							?>
 						</select>
-						Стая<select>
-							<option>101</option>
-							<option>102</option>
-							<option>103</option>
-							<option>104</option>
+						Стая<select name="room">
+							<option value="101">101</option>
+							<option value="102">102</option>
+							<option value="103">103</option>
+							<option value="104">104</option>
+							<option value="105">105</option>
+							<option value="106">106</option>
+							<option value="107">107</option>
+							<option value="108">108</option>
 						</select>
-						Тип събитие<select>
-							<option>лекция</option>
-							<option>упражнение</option>
-							<option>консултация</option>
-							<option>изпит</option>
+						Тип събитие<select id="eventType" name="type">
+							<option value="exam">изпит</option>						
+							<option value="lecture">лекция</option>
+							<option value="consultation">консултация</option>
 						</select>
-						Край на събитието<input type="date" disabled/>
+						Начало на събитието<input name="startDate" type="date"/>
+						Край на събитието<input name="endDate" id="endDate" type="date" disabled/>
 						<input type="submit" value="Запиши">
 					</form>
 				</section>
@@ -60,7 +72,7 @@
 					} else {
 						foreach($events as $event) {
 						echo "<tr>
-								<td>".date("H:m", strtotime($event["date"]))."</td><td>".$event["subjname"]."</td><td>стая ".$event["room"]."</td><td>".$event["lecturer"]."</td><td>".$event["type"]."</td>
+								<td>".date("H:i", strtotime($event["date"]))."</td><td>".$event["subjname"]."</td><td>стая ".$event["room"]."</td><td>".$event["lecturer"]."</td><td>".$event["type"]."</td><td>".$status[$event["status"]]."</td>
 							</tr>";	
 						}
 					}	

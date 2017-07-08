@@ -1,9 +1,11 @@
 <?php
 	require_once("includes/header.php");
+	$wrong_user = false;
 	if (!empty($_POST)) {
 		print_r($_POST);
 		
 		$userInfo = $db->login($_POST["uname"], $_POST["psw"]);
+		
 		if(!empty($userInfo)) {
 			session_start();
 			$_SESSION["userid"] = $userInfo["userid"];
@@ -17,6 +19,8 @@
 			} else {
 				header("location: admin.php");
 			}
+		} else {
+			$wrong_user = true;
 		}
 	
 	

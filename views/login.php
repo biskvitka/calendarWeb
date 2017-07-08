@@ -10,14 +10,13 @@
 
 	<form id="login" method="post" action="./index.php">
 	  <div class="container">
+		<?php if($wrong_user) echo "<font style='display:block;' color='red'>Не съществува такъв потребител</font>";?>
 		<input type="text" placeholder="Потребителско име" name="uname" required>
 		<br>
 		<input type="password" placeholder="Парола" name="psw" required>
 			
 		<button type="submit">Вход</button>
 		<br>
-		<!-- TODO -->
-		<!-- <input type="checkbox" checked="checked"> Запомни ме -->
 	  </div>
 	</form>
 

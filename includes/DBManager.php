@@ -6,11 +6,10 @@
 
         private $host = "localhost";
         private $user = "root";
-        private $password = ">@crypt__Magnetic93!<";
+        private $password = "";
 
         // --------------- basic ---------------
         public function connect() { 
-            echo "<p>connection ok</p>";
             $this->dbcon = mysqli_connect($this->host, $this->user, $this->password) or die("DB connection problem");
             $this->db = mysqli_select_db($this->dbcon, "calendar") or die("Couldn't select database");
             mysqli_query($this->dbcon, "SET NAMES UTF8");
@@ -42,7 +41,6 @@
            $exist = $this->login($username, $encrypted);
            if(empty($exist)) {
                 $query = "INSERT INTO users(username, pass, name, type, email) VALUES('$username', '$encrypted', '$name', '$type', '$email')";
-                echo $query."<br>";
                 $result = $this->getQuery($query);
                 return true;
            }
@@ -53,7 +51,6 @@
         
         public function insertSubject($name, $lecturerName) {
             $query = "SELECT userid FROM users WHERE name = '$lecturerName' and type = 'lecturer'";
-            echo "$query";
             $result = $this->getQuery($query);
 
            // print_r(mysqli_fetch_assoc($result));
@@ -64,13 +61,13 @@
             $result = $this->getQuery($query);
         }
         
-        public function insertEvent($type, $date, $roomid, $userid, $name) {
-            $query = "SELECT subjectid FROM subjects WHERE userid = $userid and name = '$name'";
+        public function insertEvent($type, $date, $roomid, $subject) {
+            // $query = "SELECT subjectid FROM subjects WHERE userid = $userid and name = '$name'";
             
-            $result = $this->getQuery($query);
-            $subjid = mysqli_fetch_assoc($result);
+            // $result = $this->getQuery($query);
+            // $subjid = mysqli_fetch_assoc($result);
 
-            $query = "INSERT INTO events(type, date, room, status, subjectId) values('$type', '$date', $roomid, 'none', $subjid[0])";
+            $query = "INSERT INTO events(type, date, room, status, subjectId) values('$type', '$date', $roomid, 'none', $subject)";
             // echo "$query";
             $result = $this->getQuery($query);
         }
@@ -100,7 +97,7 @@
                         JOIN subjects ON events.subjectId = subjects.subjectid 
                         JOIN users ON users.userid = subjects.userid
                     WHERE subjectstudent.userid = $userid and status = 'approved' and DATE(date) = '$date'";
-            echo $query;
+            // echo $query;
             $result = $this->getQuery($query);
             
             $rows = array();
@@ -116,7 +113,7 @@
                         JOIN subjects ON events.subjectId = subjects.subjectid
                         JOIN users ON users.userid = subjects.userid
                     WHERE DATE(date) = '$date'";
-            echo $query;
+            // echo $query;
             $result = $this->getQuery($query);
             
             $rows = array();
@@ -132,20 +129,19 @@
                         JOIN subjects ON events.subjectId = subjects.subjectid
                         JOIN users ON users.userid = subjects.userid
                     WHERE DATE(date) = '$date' and ((status ='approved' and users.userid <> $userid) or (users.userid = $userid))";
-            echo $query;
+            // echo $query;
             $result = $this->getQuery($query);
             
             $rows = array();
             while($event = mysqli_fetch_assoc($result)) {
                 $rows[] = $event;
             }
-
            return $rows;
         }
 
         public function getLecturerSubs($userid) {
             $query = "SELECT subjectid, name FROM subjects WHERE userid = '$userid'";
-            echo $query;
+            // echo $query;
             $result = $this->getQuery($query);
 
             $subs = array();
@@ -158,13 +154,13 @@
 
         public function setEventStatus($eventid, $status) {
             $query = "UPDATE events SET status = '$status' WHERE eventid = $eventid";
-            echo $query;
+            // echo $query;
             $result = $this->getQuery($query);
         }
 
         public function deleteEvent($eventid) {
             $query = "DELETE FROM events WHERE eventid = '$eventid'";
-            echo $query;
+            // echo $query;
             $result = $this->getQuery($query);
         }
 

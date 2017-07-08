@@ -40,7 +40,7 @@
 			</section>
 			<section id="events" class="events-admin">
 				
-				<table>	
+				<form><table>
 					<?php 
 					if (empty($events)) {
 						echo "<p id='no-event' '>Няма събития за този ден</p>";
@@ -54,17 +54,15 @@
 									echo "<td>отхвърлен</td>";
 							} else {
 								echo '<td>
-									<form>
-										<input type="radio" name="'.$event["eventid"].'" value="apprved">Да	
-										<input type="radio" name="'.$event["eventid"].'" value="canceled">Не
-									</form>
+									<input type="radio" name="'.$event["eventid"].'" value="apprved">Да	
+									<input type="radio" name="'.$event["eventid"].'" value="canceled">Не
 								</td>';
 							}	
 								echo "</tr>";	
-						}	
+						}
 					}
 					?>
-				</table>
+				</table></form>
 			</section>
 		</section>
 		<br><br><br><br><br>

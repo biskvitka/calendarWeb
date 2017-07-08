@@ -103,6 +103,7 @@
 
 		return $lines;
 	}
+	
 
 	public function readUsers($filepath) {
 		$keys = array('username', 'password', 'name', 'type', 'email');
@@ -125,7 +126,7 @@
 	}
 
 	public function readSubjects($filepath) {
-		$keys = array('subjname', 'userid');
+		$keys = array('subjname', 'lecturerName');
 		$numberprops = sizeof($keys);
 
 		$subjects = $this->readPropsFile($filepath, $numberprops);
