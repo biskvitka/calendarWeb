@@ -87,9 +87,6 @@
 	}
 
 	private function readPropsFile($filepath, $numberprops) {
-		if(!file_exists($filepath)) {
-			return;
-		}
 
 		$file = fopen($filepath, 'r') or die("Cannot open file at " . $filepath);
 		while(!feof($file)) {
@@ -105,10 +102,31 @@
 	}
 	
 
+	public function checkFile($filepath) {
+		$errormsg;
+		if(!file_exists($filepath)) {
+			$errormsg = "No such file $filepath";
+			$error = true;
+		}
+
+		$filetype = pathinfo($filepath, PATHINFO_EXTENSION);
+		if($filetype != 'csv') {
+			$errormsg = "Please choose .csv file";
+			$error = true;
+		}
+
+		if(filesize($filepath) > 2000000) {
+			$errormsg = "$filepath file is too large. (More than ~2MB) ";
+			$error = true;
+		}
+
+		return $errormsg;
+	}
+
 	public function readUsers($filepath) {
 		$keys = array('username', 'password', 'name', 'type', 'email');
 		$numberprops = sizeof($keys);
-
+		
 		$users = $this->readPropsFile($filepath, $numberprops);
 		if(empty($users)) {
 			return;
@@ -161,6 +179,11 @@
 		}
 
 		return $records;
+	}
+
+	public function sendMail($message, $subject, $receiver) {
+		$headers = "Content-Type: text/html; charset=utf-8\r\n";
+		mail($receiver, $subject, $message, $headers) or die("PRoblem while sending");
 	}
 }
 ?>
