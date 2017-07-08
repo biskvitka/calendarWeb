@@ -179,5 +179,10 @@
 
 		return $records;
 	}
+
+	public function sendMail($message, $subject, $receiver) {
+		$headers = "Content-Type: text/html; charset=utf-8\r\n";
+		mail($receiver, $subject, $message, $headers) or die("PRoblem while sending");
+	}
 }
 ?>
