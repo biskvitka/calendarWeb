@@ -78,7 +78,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`userid`, `username`, `pass`, `name`, `type`, `email`) VALUES
-(25, 'admin', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'Admincho Adminchev', 'admin', 'admin@admin.com');
+(25, 'admin', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'Георги Георгиев', 'admin', 'admin@admin.com');
 
 --
 -- Indexes for dumped tables
