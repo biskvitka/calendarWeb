@@ -5,8 +5,8 @@
 	$status["canceled"] = "неодобрен"; 
 	
 	$subjects = $db->getLecturerSubs($_SESSION['userid']);
-	$events = $db->getLecturerEvents($date, $_SESSION['userid']);
 	if (!empty($_POST)){
+		
 		if(isset($_POST['subjects']) && !empty($_POST['subjects']) && isset($_POST['startDate']) && !empty($_POST['startDate']) ) {
 			if ($_POST['type'] == "lecture" ) {
 				$date = $_POST['startDate'];
@@ -23,6 +23,10 @@
 				$db->insertEvent($_POST['type'], $dateHour, $_POST['room'], $_POST['subjects']);
 			}
 		}
+		unset($_POST);
+		$_POST = array();
 	}
+	
+	$events = $db->getLecturerEvents($date, $_SESSION['userid']);
 	require_once("views/lecturer.php");
 ?>

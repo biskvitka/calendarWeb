@@ -1,35 +1,61 @@
 <?php
 	require_once("includes/header.php");
 	
-	// if (!empty($_FILES)){
-		// if (!empty($_FILES['usersUpload']['tmp_name'])){
-			// $users = $site->readUsers($_FILES['usersUpload']['tmp_name']);
-			// if($users) {
-				// foreach ($users as $user){
-					// $db->addUser($user['username'], $user['name'], $user['password'], $user['type'], $user['email']);
-				// }
-			// }
-		// }
-		// if (!empty($_FILES['subjectsUpload']['tmp_name'])){
-			// $subjects = $site->readSubjects($_FILES['subjectsUpload']['tmp_name']);
+	if (!empty($_FILES)){
+		if (!empty($_FILES['usersUpload']['tmp_name'])){
 			
-			// if($subjects) {
-				// foreach ($subjects as $subject){
-					// $db->insertSubject($subject['subjname'], $subject['lecturerName']);
-				// }
-			// }
-		// }
-		// if (!empty($_FILES['studentsSubjectsUpload']['tmp_name'])){
-			// $subjectsStudents = $site->readSubjectStudent($_FILES['studentsSubjectsUpload']['tmp_name']);
+			$fileError = $site->checkFile($_FILES['usersUpload']);
+			if ($fileError == "") {
+				$users = $site->readUsers($_FILES['usersUpload']['tmp_name']);
+				if($users) {
+					foreach ($users as $user){
+						$db->addUser($user['username'], $user['name'], $user['password'], $user['type'], $user['email']);
+					}
+				}
+			} else {
+				echo $fileError;
+			}
+		}
+		if (!empty($_FILES['subjectsUpload']['tmp_name'])){
 			
-			 // if($subjectsStudents) {
-				// foreach ($subjectsStudents as $subjectStudent){
-					// $db->insertSubjectStudent($subjectStudent['subjname'], $subjectStudent['username']);
-				// }
-			// }
-		// }
-		
-	// }
+			$fileError = $site->checkFile($_FILES['subjectsUpload']);
+			if ($fileError == "") {
+				$subjects = $site->readSubjects($_FILES['subjectsUpload']['tmp_name']);
+				
+				if($subjects) {
+					foreach ($subjects as $subject){
+						$db->insertSubject($subject['subjname'], $subject['lecturerName']);
+					}
+				}
+			} else {
+				echo $fileError;
+			}
+		}
+		if (!empty($_FILES['studentsSubjectsUpload']['tmp_name'])){
+			
+			$fileError = $site->checkFile($_FILES['studentsSubjectsUpload']);
+			if ($fileError == "") {
+				$subjectsStudents = $site->readSubjectStudent($_FILES['studentsSubjectsUpload']['tmp_name']);
+				
+				 if($subjectsStudents) {
+					foreach ($subjectsStudents as $subjectStudent){
+						$db->insertSubjectStudent($subjectStudent['subjname'], $subjectStudent['username']);
+					}
+				}
+			} else {
+				echo $fileError;
+			}
+		}
+		unset($_FILES);
+		$_FILES = array();
+	}
+	if (!empty($_POST)) {
+		foreach ($_POST as $eventid => $status) {
+			$db->setEventStatus($eventid, $status);
+		}
+		unset($_POST);
+		$_POST = array();
+	}
 	
 	
 	$events = $db->getAllEvents($date);

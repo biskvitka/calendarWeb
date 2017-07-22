@@ -2,7 +2,6 @@
 	require_once("includes/header.php");
 	$wrong_user = false;
 	if (!empty($_POST)) {
-		print_r($_POST);
 		
 		$userInfo = $db->login($_POST["uname"], $_POST["psw"]);
 		
@@ -23,7 +22,8 @@
 			$wrong_user = true;
 		}
 	
-	
+		unset($_POST);
+		$_POST = array();
 	}
 	
 	

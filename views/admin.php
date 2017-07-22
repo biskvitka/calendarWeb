@@ -40,29 +40,34 @@
 			</section>
 			<section id="events" class="events-admin">
 				
-				<form><table>
+				
 					<?php 
 					if (empty($events)) {
 						echo "<p id='no-event' '>Няма събития за този ден</p>";
 					} else {
+					echo "<form action='admin.php' method='post'><table>";
 						foreach($events as $event) {	
 							echo "<tr>
-									<td>".date("H:m", strtotime($event["date"]))."</td><td>".$event["subjname"]."</td><td>стая ".$event["room"]."</td><td>".$event["lecturer"]."</td><td>".$event["type"]."</td>";
+									<td>".date("H:i", strtotime($event["date"]))."</td><td>".$event["subjname"]."</td><td>стая ".$event["room"]."</td><td>".$event["lecturer"]."</td><td>".$event["type"]."</td>";
 							if($event["status"] == "approved")	{
 									echo "<td>одобрен</td>";
 							} else if($event["status"] == "canceled"){
 									echo "<td>отхвърлен</td>";
 							} else {
 								echo '<td>
-									<input type="radio" name="'.$event["eventid"].'" value="apprved">Да	
+									<input type="radio" name="'.$event["eventid"].'" value="approved">Да	
 									<input type="radio" name="'.$event["eventid"].'" value="canceled">Не
 								</td>';
 							}	
 								echo "</tr>";	
 						}
+						echo '
+							</table>
+								<input type="submit" style="float:right;" value="Запази"/>
+						</form>
+						';
 					}
 					?>
-				</table></form>
 			</section>
 		</section>
 		<br><br><br><br><br>

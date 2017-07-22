@@ -37,27 +37,35 @@
         }
 
         public function addUser($username, $name, $password, $type, $email) {
+			$username = trim($username);
+			$name = trim($name);
+			$password = trim($password);
+			$type = trim($type);
+			$email = trim($email);
            $encrypted = hash("sha256", $password);
-           $exist = $this->login($username, $encrypted);
+           $exist = $this->login($username, $password);
            if(empty($exist)) {
                 $query = "INSERT INTO users(username, pass, name, type, email) VALUES('$username', '$encrypted', '$name', '$type', '$email')";
+				// echo $query;
                 $result = $this->getQuery($query);
                 return true;
            }
-
+			
            return false;
         }
 
         
         public function insertSubject($name, $lecturerName) {
+			$lecturerName = trim($lecturerName);
+			$name = trim($name);
             $query = "SELECT userid FROM users WHERE name = '$lecturerName' and type = 'lecturer'";
             $result = $this->getQuery($query);
 
-           // print_r(mysqli_fetch_assoc($result));
-            $result = mysqli_fetch_assoc($result);
-            $userid = $result['userid'];
+            $user = mysqli_fetch_assoc($result);
+            $userid = $user['userid'];
+
             $query = "INSERT INTO subjects(name, userid) values('$name', $userid)";
-            // echo $query;
+			// echo $query;
             $result = $this->getQuery($query);
         }
         
@@ -73,6 +81,8 @@
         }
 
         public function insertSubjectStudent($name, $username) {
+			$name = trim($name);
+			$username = trim($username);
             $queryUserid = "SELECT userid FROM users WHERE username = '$username' and type = 'student'";
             $resultuid = $this->getQuery($queryUserid);
 
@@ -80,10 +90,10 @@
             $resultsid = $this->getQuery($querySubjid);
 
            // print_r(mysqli_fetch_assoc($result));
-            $resultuid = mysqli_fetch_assoc($resultuid);
-            $userid = $resultuid['userid'];
-            $resultsid = mysqli_fetch_assoc($resultsid);
-            $subjecttid = $resultsi['subjectid'];
+            $user = mysqli_fetch_assoc($resultuid);
+            $userid = $user['userid'];
+            $subject = mysqli_fetch_assoc($resultsid);
+            $subjectid = $subject['subjectid'];
 
             $query = "INSERT INTO subjectstudent(subjectid, userid) values($subjectid, $userid)";
             // echo $query;
@@ -97,7 +107,7 @@
                         JOIN subjects ON events.subjectId = subjects.subjectid 
                         JOIN users ON users.userid = subjects.userid
                     WHERE subjectstudent.userid = $userid and status = 'approved' and DATE(date) = '$date'";
-            // echo $query;
+            //echo $query;
             $result = $this->getQuery($query);
             
             $rows = array();
@@ -154,8 +164,19 @@
 
         public function setEventStatus($eventid, $status) {
             $query = "UPDATE events SET status = '$status' WHERE eventid = $eventid";
-            // echo $query;
+            //echo $query;
             $result = $this->getQuery($query);
+        }
+
+        public function getEvent($eventid) {
+            $query = "SELECT * FROM events WHERE eventid = $eventid";
+            //echo $query;
+            $result = $this->getQuery($query);
+			$rows = array();
+            while($event = mysqli_fetch_assoc($result)) {
+                $rows[] = $event;
+            }
+           return $rows[0];
         }
 
         public function deleteEvent($eventid) {
@@ -166,7 +187,7 @@
 
         public function changeRoom($eventid, $room) {
             $query = "UPDATE events SET room = $room, status = 'none' WHERE eventid = $eventid";
-            echo $query;
+           // echo $query;
             $result = $this->getQuery($query);
         }
      }

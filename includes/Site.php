@@ -97,27 +97,23 @@
 			}
 			$lines[] = $arrayline;
 		}
-
 		return $lines;
 	}
 	
 
 	public function checkFile($filepath) {
-		$errormsg;
-		if(!file_exists($filepath)) {
-			$errormsg = "No such file $filepath";
-			$error = true;
+		$errormsg="";
+		if(!file_exists($filepath['tmp_name'])) {
+			$errormsg = "Не е намерен файл $filepath";
 		}
 
-		$filetype = pathinfo($filepath, PATHINFO_EXTENSION);
+		$filetype = pathinfo($filepath['name'], PATHINFO_EXTENSION);
 		if($filetype != 'csv') {
-			$errormsg = "Please choose .csv file";
-			$error = true;
+			$errormsg = "Моля изберете файл с разшитение .csv";
 		}
 
-		if(filesize($filepath) > 2000000) {
-			$errormsg = "$filepath file is too large. (More than ~2MB) ";
-			$error = true;
+		if(filesize($filepath['tmp_name']) > 2000000) {
+			$errormsg = "$filepath е по-голям от допустимото(~2MB) ";
 		}
 
 		return $errormsg;
@@ -136,11 +132,10 @@
 		foreach($users as $user) {
 			$records[] = array_combine($keys, $user);
 		}
-
-		return $records;
 		// echo "<pre>";
 		// print_r($records);
 		// echo "</pre>";
+		return $records;
 	}
 
 	public function readSubjects($filepath) {
@@ -156,11 +151,11 @@
 		foreach($subjects as $subject) {
 			$records[] = array_combine($keys, $subject);
 		}
-
-		return $records;
+		
 		// echo "<pre>";
 		// print_r($records);
 		// echo "</pre>";
+		return $records;
 	}
 
 	public function readSubjectStudent($filepath) {
@@ -177,13 +172,15 @@
 		foreach($entities as $entity) {
 			$records[] = array_combine($keys, $entity);
 		}
-
+		// echo "<pre>";
+		// print_r($records);
+		// echo "</pre>";
 		return $records;
 	}
 
 	public function sendMail($message, $subject, $receiver) {
 		$headers = "Content-Type: text/html; charset=utf-8\r\n";
-		mail($receiver, $subject, $message, $headers) or die("PRoblem while sending");
+		mail($receiver, "Студентски календар - събитие", $message, $headers) or die("PRoblem while sending");
 	}
 }
 ?>

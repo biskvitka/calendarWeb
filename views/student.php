@@ -29,7 +29,7 @@
 					} else {
 						foreach($events as $event) {
 							echo "<tr>
-								<td>".date("H:m", strtotime($event["date"]))."</td><td>".$event["subjname"]."</td><td>стая ".$event["room"]."</td><td>".$event["lecturer"]."</td><td>".$event["type"]."</td>
+								<td>".date("H:i", strtotime($event["date"]))."</td><td>".$event["subjname"]."</td><td>стая ".$event["room"]."</td><td>".$event["lecturer"]."</td><td>".$event["type"]."</td>
 							</tr>";
 						}							
 					}	
