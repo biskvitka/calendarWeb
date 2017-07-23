@@ -9,13 +9,17 @@
 		
 		if(isset($_POST['subjects']) && !empty($_POST['subjects']) && isset($_POST['startDate']) && !empty($_POST['startDate']) ) {
 			if ($_POST['type'] == "lecture" ) {
-				$date = $_POST['startDate'];
-				$endDate = $_POST['endDate'];
+				$date = date("Y-m-d", strtotime($_POST['startDate']));
+				//$testdate = date("Y-m-d", strtotime($date));
+				//echo "testdate: $testdate<br>";
+				$endDate = date("Y-m-d", strtotime($_POST['endDate']));
 				if (isset($endDate) && !empty($endDate) && $date < $endDate){
-					while ($date < $endDate) {
+					while ($date < $endDate) { // dosnt include end date
 						$dateHour = date("Y-m-d H:i:s", strtotime($date . "+" . $_POST['hour'] . " hours"));
 						$db->insertEvent($_POST['type'], $dateHour, $_POST['room'], $_POST['subjects']);
+						//echo "date $date<br>"; // added
 						$date = date("Y-m-d", strtotime($date."+7 days"));						
+						//echo "date $date<br>"; // added
 					}
 				}
 			} else {

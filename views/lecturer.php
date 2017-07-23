@@ -57,8 +57,8 @@
 							<option value="lecture">лекция</option>
 							<option value="consultation">консултация</option>
 						</select>
-						Начало на събитието<input name="startDate" type="date"/>
-						Край на събитието<input name="endDate" id="endDate" type="date" disabled/>
+						Начало на събитието<input name="startDate" type="date" placeholder="mm/dd/yyyy"/>
+						Край на събитието<input name="endDate" id="endDate" type="date" placeholder="mm/dd/yyyy" disabled/>
 						<input type="submit" value="Запиши">
 					</form>
 				</section>
