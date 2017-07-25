@@ -6,7 +6,7 @@
 
         private $host = "localhost";
         private $user = "root";
-        private $password = "";
+        private $password = ">@crypt__Magnetic93!<";
 
         // --------------- basic ---------------
         public function connect() { 
@@ -179,8 +179,10 @@
            return $rows[0];
         }
 
-        public function deleteEvent($eventid) {
-            $query = "DELETE FROM events WHERE eventid = '$eventid'";
+        public function deleteEvent($userid, $eventid) {
+            $query = "DELETE events 
+                      FROM events JOIN subjects on events.subjectId = subjects.subjectid
+                      WHERE eventid = '$eventid' and subjects.userid = '$userid'";
             // echo $query;
             $result = $this->getQuery($query);
         }
