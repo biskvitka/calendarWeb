@@ -6,7 +6,7 @@
 
         private $host = "localhost";
         private $user = "root";
-        private $password = ">@crypt__Magnetic93!<";
+        private $password = "";
 
         // --------------- basic ---------------
         public function connect() { 
@@ -69,13 +69,13 @@
             $result = $this->getQuery($query);
         }
         
-        public function insertEvent($type, $date, $roomid, $subject) {
+        public function insertEvent($type, $date, $endDateHour, $roomid, $subject) {
             // $query = "SELECT subjectid FROM subjects WHERE userid = $userid and name = '$name'";
             
             // $result = $this->getQuery($query);
             // $subjid = mysqli_fetch_assoc($result);
 
-            $query = "INSERT INTO events(type, date, room, status, subjectId) values('$type', '$date', $roomid, 'none', $subject)";
+            $query = "INSERT INTO events(type, date, endHour, room, status, subjectId) values('$type', '$date', '$endDateHour', $roomid, 'none', $subject)";
             // echo "$query";
             $result = $this->getQuery($query);
         }
@@ -102,7 +102,7 @@
 
         // returns array of query results. Each result is an assoc array with keys {date, subjname, lecturer, room, type}
         public function getStudentEvents($userid, $date) {
-            $query = "SELECT events.date, subjects.name as subjname, users.name as lecturer, events.room, events.type FROM subjectstudent 
+            $query = "SELECT events.date, events.endHour as endHour, subjects.name as subjname, users.name as lecturer, events.room, events.type FROM subjectstudent 
                         JOIN events ON events.subjectId = subjectstudent.subjectid 
                         JOIN subjects ON events.subjectId = subjects.subjectid 
                         JOIN users ON users.userid = subjects.userid
@@ -119,7 +119,7 @@
 
         //TODO: moje da se opravi samo approved ili vsichki
         public function getAllEvents($date) {
-            $query = "SELECT events.eventid, events.date, subjects.name as subjname, users.name as lecturer, events.room, events.type, events.status FROM events
+            $query = "SELECT events.eventid, events.date, events.endHour as endHour, subjects.name as subjname, users.name as lecturer, events.room, events.type, events.status FROM events
                         JOIN subjects ON events.subjectId = subjects.subjectid
                         JOIN users ON users.userid = subjects.userid
                     WHERE DATE(date) = '$date'";
@@ -135,7 +135,7 @@
         }
 
         public function getLecturerEvents($date, $userid) {
-            $query = "SELECT events.eventid, events.date, subjects.name as subjname, users.name as lecturer, events.room, events.type, events.status FROM events
+            $query = "SELECT events.eventid as eventid, events.date, events.endHour as endHour, subjects.name as subjname, users.name as lecturer, events.room, events.type, events.status FROM events
                         JOIN subjects ON events.subjectId = subjects.subjectid
                         JOIN users ON users.userid = subjects.userid
                     WHERE DATE(date) = '$date' and ((status ='approved' and users.userid <> $userid) or (users.userid = $userid))";

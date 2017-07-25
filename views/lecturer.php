@@ -24,7 +24,7 @@
 				<section id="add-event">
 					<p>Добавяне на събитие</p>
 					<form action="lecturer.php" method="post">
-						Час<select name="hour">
+						Начален час<select name="hour">
 							<option value="9">09:00</option>
 							<option value="10">10:00</option>
 							<option value="11">11:00</option>
@@ -35,6 +35,20 @@
 							<option value="16">16:00</option>
 							<option value="17">17:00</option>
 							<option value="18">18:00</option>
+						</select>
+						Краен час <select name="end_hour">
+							<option value="10">10:00</option>
+							<option value="11">11:00</option>
+							<option value="12">12:00</option>
+							<option value="13">13:00</option>
+							<option value="14">14:00</option>
+							<option value="15">15:00</option>
+							<option value="16">16:00</option>
+							<option value="17">17:00</option>
+							<option value="18">18:00</option>
+							<option value="19">19:00</option>
+							<option value="20">20:00</option>
+							<option value="21">21:00</option>
 						</select>
 						Предмет<select name="subjects" style="max-width: 300px;">
 							<?php foreach ($subjects as $subject){
@@ -70,12 +84,27 @@
 					if (empty($events)) {
 						echo "<p id='no-event' '>Няма събития за този ден</p>";
 					} else {
+					
 						foreach($events as $event) {
-						echo "<tr>
-								<td>".date("H:i", strtotime($event["date"]))."</td><td>".$event["subjname"]."</td><td>стая ".$event["room"]."</td><td>".$event["lecturer"]."</td><td>".$event["type"]."</td><td>".$status[$event["status"]]."</td>
-							</tr>";	
+							echo "
+							<tr>
+								<td>".date("H:i", strtotime($event["date"]))."</td>
+								<td>".date("H:i", strtotime($event["endHour"]))."</td>
+								<td>".$event["subjname"]."</td>
+								<td>стая ".$event['room']."</td>
+								<td>".$event["lecturer"]."</td>
+								<td>".$event["type"]."</td>
+								<td>".$status[$event["status"]]."</td>";
+							if ($event['lecturer'] == $_SESSION['name']){
+								echo "<td><a href='lecturer.php?date=".$date."&eventid=".$event['eventid']."'>&#x274C</a></td>";
+							} else {
+								echo "<td></td>";
+							}
+							
+							echo "</tr>";	
 						}
 					}	
+					
 					?>
 				</table>
 			</section>

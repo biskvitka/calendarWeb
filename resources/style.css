@@ -64,7 +64,7 @@ body{
 }
 
 #content{
-	width: 86%;
+	width: 88%;
 	margin: 0 auto;
 	background-color: rgba(255,255,255,0.0);
 }
@@ -90,7 +90,9 @@ header{
 	margin-top: 25px;
 	display: inline-block;
 }
-
+#x {
+	background-color: none;
+}
 #right-title{
 	position: absolute;
 	top: 45%;
@@ -153,7 +155,7 @@ header{
 }
 
 #lecturer-content #events td, #admin-content #events td {
-	width: 17%;
+	width: 16%;
 }
 
 #days{
@@ -182,7 +184,7 @@ header{
 }
 
 #events td{
-	width: 20%;
+	width: 1%;
 	padding: 5px;
 }
 
@@ -256,7 +258,7 @@ input[type=date]
 	background-color: rgba(0, 73, 144, 0.7);
 	padding: 6px;
 	border: 0px;
-	width: 86px;
+	width: 84px;
 	border-radius: 3px;
 	font-size: 15px;
 	box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
@@ -280,8 +282,6 @@ input[type=date]
 /********************************/
 #login{
     margin-left: 30%;
-
-	
 }
 
 input[type=text], input[type=password] {

@@ -30,6 +30,7 @@ CREATE TABLE `events` (
   `eventid` int(11) NOT NULL,
   `type` enum('lecture','exam','exercise','consultation') COLLATE utf8_unicode_ci NOT NULL,
   `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `endHour` datetime NOT NULL DEFAULt CURRENT_TIMESTAMP,
   `room` int(11) DEFAULT NULL,
   `status` enum('approved','none','canceled','') COLLATE utf8_unicode_ci NOT NULL,
   `subjectId` int(11) NOT NULL

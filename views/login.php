@@ -15,7 +15,7 @@
 		<br>
 		<input type="password" placeholder="Парола" name="psw" required>
 			
-		<button type="submit">Вход</button>
+		<button type="submit" id="login-btn">Вход</button>
 		<br>
 	  </div>
 	</form>
