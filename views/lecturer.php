@@ -84,14 +84,26 @@
 					if (empty($events)) {
 						echo "<p id='no-event' '>Няма събития за този ден</p>";
 					} else {
-					
+						echo '<form action="lecturer.php" method="post"><table><tr>';
 						foreach($events as $event) {
 							echo "
-							<tr>
 								<td>".date("H:i", strtotime($event["date"]))."</td>
 								<td>".date("H:i", strtotime($event["endHour"]))."</td>
 								<td>".$event["subjname"]."</td>
-								<td>стая ".$event['room']."</td>
+								<td>
+									стая 
+									<select name='room'>
+									<option value='".$event['room']."'>".$event['room']."</option>
+									<option value='101'>101</option>
+									<option value='102'>102</option>
+									<option value='103'>103</option>
+									<option value='104'>104</option>
+									<option value='105'>105</option>
+									<option value='106'>106</option>
+									<option value='107'>107</option>
+									<option value='108'>108</option>
+									</select>
+								</td>
 								<td>".$event["lecturer"]."</td>
 								<td>".$event["type"]."</td>
 								<td>".$status[$event["status"]]."</td>";
@@ -101,8 +113,12 @@
 								echo "<td></td>";
 							}
 							
-							echo "</tr>";	
+	
 						}
+							echo "</tr>
+							</table>
+							<input type='submit' value='Запази'>
+						</form>";
 					}	
 					
 					?>

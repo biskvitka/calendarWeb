@@ -155,7 +155,7 @@ header{
 }
 
 #lecturer-content #events td, #admin-content #events td {
-	width: 16%;
+	width: 10%;
 }
 
 #days{
@@ -184,7 +184,7 @@ header{
 }
 
 #events td{
-	width: 1%;
+	width: 11%;
 	padding: 5px;
 }
 
