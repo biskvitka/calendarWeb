@@ -5,7 +5,6 @@
 	$status["canceled"] = "неодобрен"; 
 	
 	$subjects = $db->getLecturerSubs($_SESSION['userid']);
-	echo "TODO: date variable, drop down menu, documentation, (smt else?)";
 	if(isset($_GET['eventid']) && !empty($_GET['eventid'])) {
 		$db->deleteEvent($_SESSION['userid'], $_GET['eventid']);
 		$link = 'lecturer.php?date='.$date;
@@ -51,7 +50,7 @@
 		header("location: ".$link);
 	}
  
- $events = $db->getLecturerEvents($date, $_SESSION['userid']);
+	$events = $db->getLecturerEvents($date, $_SESSION['userid']);
 
 	require_once("views/lecturer.php");
 ?>

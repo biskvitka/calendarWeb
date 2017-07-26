@@ -132,9 +132,6 @@
 		foreach($users as $user) {
 			$records[] = array_combine($keys, $user);
 		}
-		// echo "<pre>";
-		// print_r($records);
-		// echo "</pre>";
 		return $records;
 	}
 
@@ -151,10 +148,6 @@
 		foreach($subjects as $subject) {
 			$records[] = array_combine($keys, $subject);
 		}
-		
-		// echo "<pre>";
-		// print_r($records);
-		// echo "</pre>";
 		return $records;
 	}
 
@@ -172,9 +165,6 @@
 		foreach($entities as $entity) {
 			$records[] = array_combine($keys, $entity);
 		}
-		// echo "<pre>";
-		// print_r($records);
-		// echo "</pre>";
 		return $records;
 	}
 
@@ -188,7 +178,6 @@
 		$select = "<select name='".$eventid."'>";
 		foreach($rooms as $room) {
 			$select .= "<option value='".$room."'";
-			//echo "$room - $eventRoom";
 			if($room == "$eventroom") {
 				$select .= " selected='selected'";
 			}
