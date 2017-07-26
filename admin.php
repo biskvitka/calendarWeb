@@ -46,7 +46,7 @@
 				echo $fileError;
 			}
 		}
-		$link = 'lecturer.php?date='.$date;
+		$link = 'admin.php?date='.$date;
 		header("location: ".$link);
 	}
 	if (!empty($_POST)) {
@@ -55,6 +55,8 @@
 		}
 		unset($_POST);
 		$_POST = array();
+		$link = 'admin.php?date='.$date;
+		header("location: ".$link);
 	}
 	
 	
