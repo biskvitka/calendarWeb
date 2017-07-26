@@ -93,7 +93,7 @@
 							if ($event['lecturer'] == $_SESSION['name'] && $event["status"] != "approved") {
 								echo "<td> стая ".$site->addRoomOpts($event['room'], $event['eventid'])."</td>";
 							} else {
-								echo "<td> стая".$event['room']."</td>";
+								echo "<td> стая ".$event['room']."</td>";
 							}
 							echo "<td>".$event["lecturer"]."</td>
 								<td>".$event["type"]."</td>
