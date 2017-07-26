@@ -46,15 +46,15 @@
 				echo $fileError;
 			}
 		}
-		$link = 'lecturer.php?date='.$date;
+		$link = 'admin.php?date='.$date;
 		header("location: ".$link);
 	}
 	if (!empty($_POST)) {
 		foreach ($_POST as $eventid => $status) {
 			$db->setEventStatus($eventid, $status);
 		}
-		unset($_POST);
-		$_POST = array();
+		$link = 'admin.php?date='.$date;
+		header("location: ".$link);
 	}
 	
 	
