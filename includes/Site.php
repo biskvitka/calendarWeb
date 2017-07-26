@@ -182,5 +182,21 @@
 		$headers = "Content-Type: text/html; charset=utf-8\r\n";
 		mail($receiver, "Студентски календар - събитие", $message, $headers) or die("PRoblem while sending");
 	}
+		
+	public function addRoomOpts($eventRoom) {
+		$rooms = array('101', '102', '103', '104', '105', '106', '107', '108');
+		$select = "<select name='room'>";
+		foreach($rooms as $room) {
+			$tmp = "<option value='".$room."'";
+			if($room == $eventRoom) {
+				$tmp .= " selected=\"selected\"";
+			}
+			$tmp .= ">$room</option>";
+			$select .= $tmp;
+		}
+		$select .= "</select>";
+
+		return $select;
+	}
 }
 ?>
