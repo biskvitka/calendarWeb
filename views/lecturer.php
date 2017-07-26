@@ -89,9 +89,13 @@
 							echo "
 								<td>".date("H:i", strtotime($event["date"]))."</td>
 								<td>".date("H:i", strtotime($event["endHour"]))."</td>
-								<td>".$event["subjname"]."</td>
-								<td> стая ".$site->addRoomOpts($event['room'], $event['eventid'])."</td>".
-								"<td>".$event["lecturer"]."</td>
+								<td>".$event["subjname"]."</td>";
+							if ($event['lecturer'] == $_SESSION['name'] && $event["status"] != "approved") {
+								echo "<td> стая ".$site->addRoomOpts($event['room'], $event['eventid'])."</td>";
+							} else {
+								echo "<td> стая".$event['room']."</td>";
+							}
+							echo "<td>".$event["lecturer"]."</td>
 								<td>".$event["type"]."</td>
 								<td>".$status[$event["status"]]."</td>";
 							if ($event['lecturer'] == $_SESSION['name']){

@@ -37,7 +37,8 @@
 			}
 		}
 		
-		unset($_POST);
+		$link = 'lecturer.php?date='.$date;
+		header("location: ".$link);
 		$_POST = array();
 	}
 	
