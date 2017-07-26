@@ -46,8 +46,8 @@
 				echo $fileError;
 			}
 		}
-		unset($_FILES);
-		$_FILES = array();
+		$link = 'lecturer.php?date='.$date;
+		header("location: ".$link);
 	}
 	if (!empty($_POST)) {
 		foreach ($_POST as $eventid => $status) {

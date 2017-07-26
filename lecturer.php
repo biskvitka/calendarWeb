@@ -8,6 +8,8 @@
 	echo "TODO: date variable, drop down menu, documentation, (smt else?)";
 	if(isset($_GET['eventid']) && !empty($_GET['eventid'])) {
 		$db->deleteEvent($_SESSION['userid'], $_GET['eventid']);
+		$link = 'lecturer.php?date='.$date;
+		header("location: ".$link);
 	}
 	if (!empty($_POST)){
 		
@@ -39,7 +41,6 @@
 		
 		$link = 'lecturer.php?date='.$date;
 		header("location: ".$link);
-		$_POST = array();
 	}
 	
 	$events = $db->getLecturerEvents($date, $_SESSION['userid']);
