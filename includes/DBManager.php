@@ -70,11 +70,6 @@
         }
         
         public function insertEvent($type, $date, $endDateHour, $roomid, $subject) {
-            // $query = "SELECT subjectid FROM subjects WHERE userid = $userid and name = '$name'";
-            
-            // $result = $this->getQuery($query);
-            // $subjid = mysqli_fetch_assoc($result);
-
             $query = "INSERT INTO events(type, date, endHour, room, status, subjectId) values('$type', '$date', '$endDateHour', $roomid, 'none', $subject)";
             // echo "$query";
             $result = $this->getQuery($query);
@@ -89,7 +84,6 @@
             $querySubjid = "SELECT subjectid FROM subjects WHERE name = '$name'";
             $resultsid = $this->getQuery($querySubjid);
 
-           // print_r(mysqli_fetch_assoc($result));
             $user = mysqli_fetch_assoc($resultuid);
             $userid = $user['userid'];
             $subject = mysqli_fetch_assoc($resultsid);
@@ -117,7 +111,6 @@
             return $rows;
         }
 
-        //TODO: moje da se opravi samo approved ili vsichki
         public function getAllEvents($date) {
             $query = "SELECT events.eventid, events.date, events.endHour as endHour, subjects.name as subjname, users.name as lecturer, events.room, events.type, events.status FROM events
                         JOIN subjects ON events.subjectId = subjects.subjectid
