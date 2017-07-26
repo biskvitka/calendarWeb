@@ -64,7 +64,7 @@ body{
 }
 
 #content{
-	width: 88%;
+	width: 87%;
 	margin: 0 auto;
 	background-color: rgba(255,255,255,0.0);
 }
@@ -155,7 +155,7 @@ header{
 }
 
 #lecturer-content #events td, #admin-content #events td {
-	width: 10%;
+	width: 18%;
 }
 
 #days{
@@ -175,7 +175,7 @@ header{
 #events{
 	display: inline-block;
 	font-family: Comic Sans MS;
-	width: 850px;
+	width: 74%;
 	float: right;
 }
 #events table{
@@ -187,7 +187,9 @@ header{
 	width: 11%;
 	padding: 5px;
 }
-
+a{
+	text-decoration: none;
+}
 .events-student tr:nth-child(even){
 	background-color: rgba(98, 63, 21, 0.1);
 }
@@ -318,10 +320,4 @@ button {
 
 button:hover {
     opacity: 0.8;
-}
-
-@media screen and (max-width: 850px) {
-    #events {
-        width: 450px;
-    }
 }
