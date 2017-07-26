@@ -13,17 +13,17 @@
 		
 		if(isset($_POST['subjects']) && !empty($_POST['subjects']) && isset($_POST['startDate']) && !empty($_POST['startDate']) ) {
 			if ($_POST['type'] == "lecture" ) {
-				$date = date("Y-m-d", strtotime($_POST['startDate']));
+				$startDate = date("Y-m-d", strtotime($_POST['startDate']));
 				//$testdate = date("Y-m-d", strtotime($date));
 				//echo "testdate: $testdate<br>";
 				$endDate = date("Y-m-d", strtotime($_POST['endDate']));
-				if (isset($endDate) && !empty($endDate) && $date < $endDate && $_POST['hour'] < $_POST['end_hour']){
-					while ($date < $endDate) { // dosnt include end date
-						$dateHour = date("Y-m-d H:i:s", strtotime($date . "+" . $_POST['hour'] . " hours"));
-						$endDateHour = date("Y-m-d H:i:s", strtotime($date . "+" . $_POST['end_hour'] . " hours"));
+				if (isset($endDate) && !empty($endDate) && $startDate < $endDate && $_POST['hour'] < $_POST['end_hour']){
+					while ($startDate <= $endDate) { // dosnt include end date
+						$dateHour = date("Y-m-d H:i:s", strtotime($startDate . "+" . $_POST['hour'] . " hours"));
+						$endDateHour = date("Y-m-d H:i:s", strtotime($startDate . "+" . $_POST['end_hour'] . " hours"));
 						$db->insertEvent($_POST['type'], $dateHour, $endDateHour, $_POST['room'], $_POST['subjects']);
 						//echo "date $date<br>"; // added
-						$date = date("Y-m-d", strtotime($date."+7 days"));						
+						$startDate = date("Y-m-d", strtotime($startDate."+7 days"));						
 						//echo "date $date<br>"; // added
 					}
 				}
@@ -43,5 +43,13 @@
 	}
 	
 	$events = $db->getLecturerEvents($date, $_SESSION['userid']);
+	if (!empty($_POST)){
+		foreach($events as $event) {
+			if(isset($_POST['$event["eventid"]']) && !empty($_POST['$event["eventid"]'])) {
+				$db->changeRoom($event["eventid"], $_POST['$event["eventid"]']);
+			}
+		}
+	}
+
 	require_once("views/lecturer.php");
 ?>
