@@ -23,7 +23,7 @@
 				</section>
 				<section id="add-event">
 					<p>Добавяне на събитие</p>
-					<form action="lecturer.php" method="post">
+					<form action="lecturer.php?date=<?php echo $_GET['date'];?>" method="post">
 						Начален час<select name="hour">
 							<option value="9">09:00</option>
 							<option value="10">10:00</option>
@@ -84,7 +84,7 @@
 					if (empty($events)) {
 						echo "<p id='no-event' '>Няма събития за този ден</p>";
 					} else {
-						echo '<form action="lecturer.php" method="post"><table><tr>';
+						echo '<form action="lecturer.php?date='.$date.'" method="post"><table><tr>';
 						foreach($events as $event) {
 							echo "
 								<td>".date("H:i", strtotime($event["date"]))."</td>

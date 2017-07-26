@@ -21,7 +21,7 @@
 						<?php echo $calendar;?>
 					</div>
 				</section>
-				<form  action="admin.php" method="post" enctype="multipart/form-data">
+				<form  action="admin.php?date=<?php echo $date;?>" method="post" enctype="multipart/form-data">
 					<input type="file" id="usersUpload" name="usersUpload" style="display:none;"/>
 					<input type="button" id="usersUploadButton" value="Потребители" onclick="document.getElementById('usersUpload').click();">
 					<label for="usersUpload" id="usersFileName"></label>
@@ -45,7 +45,7 @@
 					if (empty($events)) {
 						echo "<p id='no-event' '>Няма събития за този ден</p>";
 					} else {
-					echo "<form action='admin.php' method='post'><table>";
+					echo '<form action="admin.php?date='.$date.'" method="post"><table>';
 						foreach($events as $event) {	
 							echo "<tr>
 									<td style='width:9%'>".date("H:i", strtotime($event["date"]))."</td>

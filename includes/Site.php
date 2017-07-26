@@ -187,13 +187,12 @@
 		$rooms = array('101', '102', '103', '104', '105', '106', '107', '108');
 		$select = "<select name='".$eventid."'>";
 		foreach($rooms as $room) {
-			$tmp = "<option value='".$room."'";
+			$select .= "<option value='".$room."'";
 			//echo "$room - $eventRoom";
 			if($room == "$eventroom") {
-				$tmp .= " selected='selected'";
+				$select .= " selected='selected'";
 			}
-			$tmp .= ">$room</option>";
-			$select .= $tmp;
+			$select .= ">$room</option>";
 		}
 		$select .= "</select>";
 
