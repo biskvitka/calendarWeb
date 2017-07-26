@@ -183,12 +183,13 @@
 		mail($receiver, "Студентски календар - събитие", $message, $headers) or die("PRoblem while sending");
 	}
 		
-	public function addRoomOpts($eventRoom, $eventid) {
+	public function addRoomOpts($eventroom, $eventid) {
 		$rooms = array('101', '102', '103', '104', '105', '106', '107', '108');
 		$select = "<select name='".$eventid."'>";
 		foreach($rooms as $room) {
 			$tmp = "<option value='".$room."'";
-			if($room == $eventRoom) {
+			//echo "$room - $eventRoom";
+			if($room == "$eventroom") {
 				$tmp .= " selected='selected'";
 			}
 			$tmp .= ">$room</option>";

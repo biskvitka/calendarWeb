@@ -90,7 +90,7 @@
 								<td>".date("H:i", strtotime($event["date"]))."</td>
 								<td>".date("H:i", strtotime($event["endHour"]))."</td>
 								<td>".$event["subjname"]."</td>
-								<td> стая ".$site->addRoomOpts($event, $event['eventid'])."</td>".
+								<td> стая ".$site->addRoomOpts($event['room'], $event['eventid'])."</td>".
 								"<td>".$event["lecturer"]."</td>
 								<td>".$event["type"]."</td>
 								<td>".$status[$event["status"]]."</td>";
